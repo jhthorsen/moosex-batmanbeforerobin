@@ -127,7 +127,7 @@ sub init_meta {
 
 =head1 AUTHOR
 
-Jan Henning Thorse C<< jhthorsen at cpan.org >>
+Jan Henning Thorsen C<< jhthorsen at cpan.org >>
 
 =cut
 
