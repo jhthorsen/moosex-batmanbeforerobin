@@ -1,0 +1,29 @@
+NAME
+    MooseX::InTheRightOrder - Ordered has, with, extends
+
+VERSION
+    0.00
+
+DESCRIPTION
+    This class will take over some of the exported functions from Moose and
+    call them in "the right order".
+
+SYNOPSIS
+     package MyClass;
+     use MooseX::InTheRightOrder;
+
+     extends ...;
+     with ...;
+     has ...;
+
+     one; # instead of 1;
+
+EXPORTED FUNCTIONS
+  extends
+  has
+  with
+BUGS
+COPYRIGHT & LICENSE
+AUTHOR
+    Jan Henning Thorse "jhthorsen at cpan.org"
+
