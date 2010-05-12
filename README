@@ -24,6 +24,9 @@ SYNOPSIS
 
      one; # instead of 1;
 
+    "__PACKAGE__" is an alternative to "one()" and "use Moose" is not
+    required: This class will export all the sugar from Moose automatically.
+
 EXPORTED FUNCTIONS
     See Moose.
 
