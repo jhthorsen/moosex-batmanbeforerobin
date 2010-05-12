@@ -34,4 +34,4 @@ has will_create_conflict => (
     default => 'TestClass',
 );
 
-one;
+__PACKAGE__;

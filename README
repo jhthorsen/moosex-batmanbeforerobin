@@ -32,6 +32,9 @@ EXPORTED FUNCTIONS
     will call the Moose keywords in "the right order" and afterwards make
     the class immutable and clear the namespace, using namespace::autoclean.
 
+  __PACKAGE__
+    Alternative to "one()".
+
 METHODS
   init_meta
     This method is called on "import()" and sets up namespace::autoclean.

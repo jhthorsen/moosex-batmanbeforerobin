@@ -4,7 +4,7 @@ use lib qw(lib t/lib);
 use Class::MOP;
 use Test::More;
 
-plan tests => 9;
+plan tests => 12;
 
 my $obj;
 

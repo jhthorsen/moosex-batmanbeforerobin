@@ -37,7 +37,7 @@ use namespace::autoclean ();
 use Moose::Exporter;
 
 Moose::Exporter->setup_import_methods(
-    with_meta => [qw/ one /],
+    with_meta => [qw/ one __PACKAGE__ /],
     as_is => [qw/ extends has with override augment before after around /],
     also => 'Moose',
 );
@@ -96,6 +96,18 @@ sub one {
     $meta->make_immutable;
  
     return 1;
+}
+
+=head2 __PACKAGE__
+
+Alternative to L</one()>.
+
+=cut
+
+sub __PACKAGE__ {
+    my $meta = shift;
+    one($meta, @_);
+    return $meta->name;
 }
 
 =head1 METHODS
