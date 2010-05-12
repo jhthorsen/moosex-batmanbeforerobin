@@ -30,6 +30,10 @@ and call them in "the right order":
 
  one; # instead of 1;
 
+L</__PACKAGE__> is an alternative to L</one()> and C<use Moose>
+is not required: This class will export all the sugar from L<Moose>
+automatically.
+
 =cut
 
 use Moose ();
