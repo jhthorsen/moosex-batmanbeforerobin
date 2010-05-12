@@ -1,5 +1,8 @@
 Revision history for MooseX-InTheRightOrder
 
-0.00
-       * Init repo
+0.01
+       * Add class gets immutable
+       * Add namespace::autoclean
+       * Add one() which calls extends(), has() and then with()
+         - Need to make sure modifiers are called as well
 

@@ -2,7 +2,7 @@ NAME
     MooseX::InTheRightOrder - Ordered has, with, extends
 
 VERSION
-    0.00
+    0.01
 
 DESCRIPTION
     This class will take over some of the exported functions from Moose and
@@ -20,8 +20,25 @@ SYNOPSIS
 
 EXPORTED FUNCTIONS
   extends
+    This function will cache all classes which you want to extend your class
+    with and then load them before "has()" and "with()" inside "one()".
+
   has
+    This function will cache all attributes which you want to define in your
+    class and then define them after "extends()", but before "with()" inside
+    "one()".
+
   with
+    This function will cache all roles which you want to do in your class
+    and then include them after "extends()" and "has()" inside "one()".
+
+  one
+    This function should replace "1;" on the last line in your class. It
+    will run "extends", "has()" and "with()" in "the right order". And
+    afterwards make the class immutable and clear the namespace, using
+    namespace::autoclean.
+
+METHODS
 BUGS
 COPYRIGHT & LICENSE
 AUTHOR
