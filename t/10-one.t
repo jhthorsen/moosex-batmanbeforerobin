@@ -10,6 +10,7 @@ my $obj;
 
 eval {
     Class::MOP::load_class('TestClass');
+    $TestClass::method_in_role = '';
     1;
 };
 
@@ -26,3 +27,5 @@ ok(!$obj->can('before'), 'obj cannot before (from Moose)');
 
 is($obj->method_in_role, 2, 'around modifier applied');
 is($TestClass::method_in_role, 'ba', 'before/after modifier applied');
+
+is(TestClass::__PACKAGE__(), 'TestClass', '__PACKAGE__ returns as expected');
