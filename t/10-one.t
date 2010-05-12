@@ -9,17 +9,20 @@ plan tests => 9;
 my $obj;
 
 eval {
-    Class::MOP::load_class('TestLib');
+    Class::MOP::load_class('TestClass');
     1;
 };
 
-is($@, '', 'TestLib was loaded successfully') or BAIL_OUT 'Could not load TestLib';
-is(TestLib->meta->is_immutable, 1, 'TestLib is immutable');
-ok($obj = TestLib->new, 'TestLib object created');
-is($obj->will_create_conflict, 'TestLib', 'will_create_conflict() is from TestLib');
+is($@, '', 'TestClass was loaded successfully') or BAIL_OUT 'Could not load TestClass';
+is(TestClass->meta->is_immutable, 1, 'TestClass is immutable');
+ok($obj = TestClass->new, 'TestClass object created');
+is($obj->will_create_conflict, 'TestClass', 'will_create_conflict() is from TestClass');
 
 ok(!$obj->can('one'), 'obj cannot one');
 ok(!$obj->can('with'), 'obj cannot with');
 ok(!$obj->can('has'), 'obj cannot has');
 ok(!$obj->can('extends'), 'obj cannot extends');
 ok(!$obj->can('before'), 'obj cannot before (from Moose)');
+
+is($obj->method_in_role, 2, 'around modifier applied');
+is($TestClass::method_in_role, 'ba', 'before/after modifier applied');

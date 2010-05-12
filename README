@@ -2,11 +2,17 @@ NAME
     MooseX::InTheRightOrder - Ordered has, with, extends
 
 VERSION
-    0.01
+    0.02
 
 DESCRIPTION
     This class will take over some of the exported functions from Moose and
-    call them in "the right order".
+    call them in "the right order":
+
+     1: extends()
+     2: has()
+     3: with()
+     4: override()/augment()
+     5: before()/after()/around()
 
 SYNOPSIS
      package MyClass;
@@ -19,24 +25,12 @@ SYNOPSIS
      one; # instead of 1;
 
 EXPORTED FUNCTIONS
-  extends
-    This function will cache all classes which you want to extend your class
-    with and then load them before "has()" and "with()" inside "one()".
-
-  has
-    This function will cache all attributes which you want to define in your
-    class and then define them after "extends()", but before "with()" inside
-    "one()".
-
-  with
-    This function will cache all roles which you want to do in your class
-    and then include them after "extends()" and "has()" inside "one()".
+    See Moose.
 
   one
     This function should replace "1;" on the last line in your class. It
-    will run "extends", "has()" and "with()" in "the right order". And
-    afterwards make the class immutable and clear the namespace, using
-    namespace::autoclean.
+    will call the Moose keywords in "the right order" and afterwards make
+    the class immutable and clear the namespace, using namespace::autoclean.
 
 METHODS
   init_meta

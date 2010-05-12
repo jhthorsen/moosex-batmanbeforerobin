@@ -1,8 +1,10 @@
 Revision history for MooseX-InTheRightOrder
 
-0.01
+0.02
+       * Add override(), augment(), before(), after() and around()
+
+0.01     Wed May 12 23:59:56 CEST 2010
        * Add class gets immutable
        * Add namespace::autoclean
        * Add one() which calls extends(), has() and then with()
-         - Need to make sure modifiers are called as well
 

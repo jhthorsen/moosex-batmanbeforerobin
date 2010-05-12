@@ -6,12 +6,18 @@ MooseX::InTheRightOrder - Ordered has, with, extends
 
 =head1 VERSION
 
-0.01
+0.02
 
 =head1 DESCRIPTION
 
 This class will take over some of the exported functions from L<Moose>
-and call them in "the right order".
+and call them in "the right order":
+
+ 1: extends()
+ 2: has()
+ 3: with()
+ 4: override()/augment()
+ 5: before()/after()/around()
 
 =head1 SYNOPSIS
 
@@ -32,52 +38,33 @@ use Moose::Exporter;
 
 Moose::Exporter->setup_import_methods(
     with_meta => [qw/ one /],
-    as_is => [qw/ extends has with /],
+    as_is => [qw/ extends has with override augment before after around /],
     also => 'Moose',
 );
 
-my(@has, @with, @extends);
+my(@extends, @has, @with, @inherit, @modifier);
 
 =head1 EXPORTED FUNCTIONS
 
-=head2 extends
-
-This function will cache all classes which you want to extend your class
-with and then load them before C<has()> and C<with()> inside L</one()>.
+See L<Moose>.
 
 =cut
 
-sub extends {
-    push @extends, [@_];
-}
-
-=head2 has
-
-This function will cache all attributes which you want to define in your
-class and then define them after C<extends()>, but before C<with()>
-inside L</one()>.
-
-=cut
-
-sub has {
-    push @has, [@_];
-}
-
-=head2 with
-
-This function will cache all roles which you want to do in your class
-and then include them after C<extends()> and C<has()> inside L</one()>.
-
-=cut
-
-sub with {
-    push @with, [@_];
+BEGIN {
+    *extends = sub { push @extends, [@_] };
+    *has = sub { push @has, [@_] };
+    *with = sub { push @with, [@_] };
+    *override = sub { push @inherit, ['Moose::override' => @_] };
+    *augment = sub { push @inherit, ['Moose::augment' => @_] };
+    *before = sub { push @modifier, ['Moose::before' => @_] };
+    *after = sub { push @modifier, ['Moose::after' => @_] };
+    *around = sub { push @modifier, ['Moose::around' => @_] };
 }
 
 =head2 one
 
-This function should replace C<1;> on the last line in your class. It
-will run C<extends>, C<has()> and C<with()> in "the right order". And
+This function should replace C<1;> on the last line in your class.
+It will call the L<Moose> keywords in "the right order" and
 afterwards make the class immutable and clear the namespace, using
 L<namespace::autoclean>.
 
@@ -95,8 +82,16 @@ sub one {
     for my $with (@with) {
         $meta->Moose::with(@$with);
     }
+    for my $inherit (@inherit) {
+        my $moose_method = shift @$inherit;
+        $meta->$moose_method(@$inherit);
+    }
+    for my $modifier (@modifier) {
+        my $moose_method = shift @$modifier;
+        $meta->$moose_method(@$modifier);
+    }
 
-    @extends = @has = @with = ();
+    @extends = @has = @with = @inherit = @modifier = ();
 
     $meta->make_immutable;
  

@@ -8,4 +8,8 @@ has will_create_conflict => (
     default => 'SomeRole',
 );
 
+sub method_in_role {
+    return 1;
+}
+
 1;
