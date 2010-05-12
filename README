@@ -39,6 +39,9 @@ EXPORTED FUNCTIONS
     namespace::autoclean.
 
 METHODS
+  init_meta
+    This method is called on "import()" and sets up namespace::autoclean.
+
 BUGS
 COPYRIGHT & LICENSE
 AUTHOR
