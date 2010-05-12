@@ -105,6 +105,10 @@ sub one {
 
 =head1 METHODS
 
+=heda2 init_meta
+
+This method is called on C<import()> and sets up L<namespace::autoclean>.
+
 =cut
 
 sub init_meta {
