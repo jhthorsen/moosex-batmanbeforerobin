@@ -1,6 +1,6 @@
 Revision history for MooseX-InTheRightOrder
 
-0.02
+0.02     Wed Sep  8 14:54:14 CEST 2010
        * Add override(), augment(), before(), after() and around()
        * Add __PACKAGE__ as an alternative to one();
 

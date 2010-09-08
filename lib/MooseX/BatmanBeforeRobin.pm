@@ -47,6 +47,8 @@ use Moose ();
 use namespace::autoclean ();
 use Moose::Exporter;
 
+our $VERSION = '0.02';
+
 Moose::Exporter->setup_import_methods(
     with_meta => [qw/ one __PACKAGE__ /],
     as_is => [qw/ extends has with override augment before after around /],
