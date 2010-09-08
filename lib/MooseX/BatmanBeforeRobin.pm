@@ -141,9 +141,10 @@ sub init_meta {
     return $options{'for_class'}->meta;
 }
 
-=head1 BUGS
-
 =head1 COPYRIGHT & LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =head1 AUTHOR
 

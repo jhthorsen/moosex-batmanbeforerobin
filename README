@@ -1,31 +1,39 @@
 NAME
-    MooseX::InTheRightOrder - Ordered has, with, extends
+    MooseX::BatmanBeforeRobin - Ordered Moose sugar
 
 VERSION
     0.02
+
+SYNOPSIS
+        package MyClass;
+        use MooseX::BatmanBeforeRobin;
+
+        extends ...;
+        with ...;
+        has ...;
+
+        one; # instead of 1;
 
 DESCRIPTION
     This class will take over some of the exported functions from Moose and
     call them in "the right order":
 
-     1: extends()
-     2: has()
-     3: with()
-     4: override()/augment()
-     5: before()/after()/around()
+        1: extends()
+        2: has()
+        3: with()
+        4: override()/augment()
+        5: before()/after()/around()
 
-SYNOPSIS
-     package MyClass;
-     use MooseX::InTheRightOrder;
+    This is done by stashing the statements away, and applying them once the
+    "one" function is called. An alternative to "one" is "__PACKAGE__",
+    which allows you to do
 
-     extends ...;
-     with ...;
-     has ...;
+        (require MyMoose::Class)->some_method;
 
-     one; # instead of 1;
+    since "require" will return the last value in the package.
 
-    "__PACKAGE__" is an alternative to "one()" and "use Moose" is not
-    required: This class will export all the sugar from Moose automatically.
+    This module will also export all other functions from Moose, so "use
+    Moose" is not required.
 
 EXPORTED FUNCTIONS
     See Moose.
@@ -36,14 +44,17 @@ EXPORTED FUNCTIONS
     the class immutable and clear the namespace, using namespace::autoclean.
 
   __PACKAGE__
-    Alternative to "one()".
+    Alternative to "one".
 
 METHODS
   init_meta
-    This method is called on "import()" and sets up namespace::autoclean.
+    This method is called on "import()" and sets up namespace::autoclean and
+    Moose.
 
-BUGS
 COPYRIGHT & LICENSE
+    This library is free software. You can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
 AUTHOR
     Jan Henning Thorsen "jhthorsen at cpan.org"
 
