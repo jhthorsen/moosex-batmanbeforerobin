@@ -2,7 +2,7 @@ package TestClass;
 
 use strict;
 use warnings;
-use MooseX::InTheRightOrder;
+use MooseX::BatmanBeforeRobin;
 
 our $method_in_role = '';
 

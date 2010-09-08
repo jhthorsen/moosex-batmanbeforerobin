@@ -1,38 +1,45 @@
-package MooseX::InTheRightOrder;
+package MooseX::BatmanBeforeRobin;
 
 =head1 NAME
 
-MooseX::InTheRightOrder - Ordered has, with, extends
+MooseX::BatmanBeforeRobin - Ordered Moose sugar
 
 =head1 VERSION
 
 0.02
+
+=head1 SYNOPSIS
+
+    package MyClass;
+    use MooseX::BatmanBeforeRobin;
+
+    extends ...;
+    with ...;
+    has ...;
+
+    one; # instead of 1;
 
 =head1 DESCRIPTION
 
 This class will take over some of the exported functions from L<Moose>
 and call them in "the right order":
 
- 1: extends()
- 2: has()
- 3: with()
- 4: override()/augment()
- 5: before()/after()/around()
+    1: extends()
+    2: has()
+    3: with()
+    4: override()/augment()
+    5: before()/after()/around()
 
-=head1 SYNOPSIS
+This is done by stashing the statements away, and applying them once
+the L</one> function is called. An alternative to L</one> is
+L</__PACKAGE__>, which allows you to do
 
- package MyClass;
- use MooseX::InTheRightOrder;
+    (require MyMoose::Class)->some_method;
 
- extends ...;
- with ...;
- has ...;
+since C<require> will return the last value in the package.
 
- one; # instead of 1;
-
-L</__PACKAGE__> is an alternative to L</one()> and C<use Moose>
-is not required: This class will export all the sugar from L<Moose>
-automatically.
+This module will also export all other functions from L<Moose>, so
+C<use Moose> is not required.
 
 =cut
 
@@ -95,6 +102,7 @@ sub one {
         $meta->$moose_method(@$modifier);
     }
 
+    # clear the variables for the next module load
     @extends = @has = @with = @inherit = @modifier = ();
 
     $meta->make_immutable;
@@ -104,13 +112,13 @@ sub one {
 
 =head2 __PACKAGE__
 
-Alternative to L</one()>.
+Alternative to L</one>.
 
 =cut
 
 sub __PACKAGE__ {
     my $meta = shift;
-    one($meta, @_);
+    $meta->MooseX::BatmanBeforeRobin::one(@_);
     return $meta->name;
 }
 
@@ -118,7 +126,8 @@ sub __PACKAGE__ {
 
 =head2 init_meta
 
-This method is called on C<import()> and sets up L<namespace::autoclean>.
+This method is called on C<import()> and sets up L<namespace::autoclean>
+and L<Moose>.
 
 =cut
 
