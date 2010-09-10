@@ -1,5 +1,8 @@
 Revision history for MooseX-InTheRightOrder
 
+0.0201   Fri Sep 10 15:36:53 CEST 2010
+       * Fix 00-pod-coverage.t: Will ignore functions documented in Moose
+
 0.02     Wed Sep  8 14:54:14 CEST 2010
        * Add override(), augment(), before(), after() and around()
        * Add __PACKAGE__ as an alternative to one();

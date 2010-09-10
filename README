@@ -2,7 +2,7 @@ NAME
     MooseX::BatmanBeforeRobin - Ordered Moose sugar
 
 VERSION
-    0.02
+    0.0201
 
 SYNOPSIS
         package MyClass;
