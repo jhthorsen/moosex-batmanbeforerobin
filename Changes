@@ -1,5 +1,10 @@
 Revision history for MooseX-InTheRightOrder
 
+0.03     Sun Sep 12 13:54:56 CEST 2010
+       * Removed __PACKAGE__, since it does not allow
+         __PACKAGE__->meta->add_method(...) and friends multiple
+         times because of "make_immutable".
+
 0.0201   Fri Sep 10 15:36:53 CEST 2010
        * Fix 00-pod-coverage.t: Will ignore functions documented in Moose
 

@@ -6,7 +6,7 @@ MooseX::BatmanBeforeRobin - Ordered Moose sugar
 
 =head1 VERSION
 
-0.0201
+0.03
 
 =head1 SYNOPSIS
 
@@ -31,12 +31,7 @@ and call them in "the right order":
     5: before()/after()/around()
 
 This is done by stashing the statements away, and applying them once
-the L</one> function is called. An alternative to L</one> is
-L</__PACKAGE__>, which allows you to do
-
-    (require MyMoose::Class)->some_method;
-
-since C<require> will return the last value in the package.
+the L</one> function is called.
 
 This module will also export all other functions from L<Moose>, so
 C<use Moose> is not required.
@@ -47,10 +42,10 @@ use Moose ();
 use namespace::autoclean ();
 use Moose::Exporter;
 
-our $VERSION = eval '0.0201';
+our $VERSION = eval '0.03';
 
 Moose::Exporter->setup_import_methods(
-    with_meta => [qw/ one __PACKAGE__ /],
+    with_meta => [qw/ one /],
     as_is => [qw/ extends has with override augment before after around /],
     also => 'Moose',
 );
@@ -110,18 +105,6 @@ sub one {
     $meta->make_immutable;
  
     return 1;
-}
-
-=head2 __PACKAGE__
-
-Alternative to L</one>.
-
-=cut
-
-sub __PACKAGE__ {
-    my $meta = shift;
-    $meta->MooseX::BatmanBeforeRobin::one(@_);
-    return $meta->name;
 }
 
 =head1 METHODS

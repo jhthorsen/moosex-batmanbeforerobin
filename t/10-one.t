@@ -4,7 +4,7 @@ use lib qw(lib t/lib);
 use Class::MOP;
 use Test::More;
 
-plan tests => 12;
+plan tests => 11;
 
 my $obj;
 
@@ -28,4 +28,3 @@ ok(!$obj->can('before'), 'obj cannot before (from Moose)');
 is($obj->method_in_role, 2, 'around modifier applied');
 is($TestClass::method_in_role, 'ba', 'before/after modifier applied');
 
-is(TestClass::__PACKAGE__(), 'TestClass', '__PACKAGE__ returns as expected');

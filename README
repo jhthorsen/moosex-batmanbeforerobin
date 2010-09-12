@@ -2,7 +2,7 @@ NAME
     MooseX::BatmanBeforeRobin - Ordered Moose sugar
 
 VERSION
-    0.0201
+    0.03
 
 SYNOPSIS
         package MyClass;
@@ -25,12 +25,7 @@ DESCRIPTION
         5: before()/after()/around()
 
     This is done by stashing the statements away, and applying them once the
-    "one" function is called. An alternative to "one" is "__PACKAGE__",
-    which allows you to do
-
-        (require MyMoose::Class)->some_method;
-
-    since "require" will return the last value in the package.
+    "one" function is called.
 
     This module will also export all other functions from Moose, so "use
     Moose" is not required.
@@ -42,9 +37,6 @@ EXPORTED FUNCTIONS
     This function should replace "1;" on the last line in your class. It
     will call the Moose keywords in "the right order" and afterwards make
     the class immutable and clear the namespace, using namespace::autoclean.
-
-  __PACKAGE__
-    Alternative to "one".
 
 METHODS
   init_meta
